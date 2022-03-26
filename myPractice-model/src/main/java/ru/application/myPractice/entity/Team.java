@@ -1,8 +1,7 @@
 package ru.application.myPractice.entity;
 
 import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.hibernate.annotations.OrderBy;
 
 import javax.persistence.AttributeOverride;
@@ -14,14 +13,12 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
 @Entity
 @Table(name = "TEAMS")
-@Getter
-@Setter
+@Data
 public class Team {
 
     @Builder.Default
@@ -44,23 +41,11 @@ public class Team {
 
     @SuppressWarnings("unused")
     @Builder
-    public Team(String teamName) {
+    public Team(String teamName, Set<Player> playerSet) {
         this.teamName = teamName;
+        this.playerSet = playerSet;
     }
 
     public Team() {
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Team team = (Team) o;
-        return teamName.equals(team.teamName);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(teamName);
     }
 }
