@@ -12,7 +12,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class TeamMapperTest {
 
     @Test
-    public void shouldTeamToTeamDto() {
+    public void shouldMapperTeamToTeamDto() {
         //given
         Team team = Team.builder()
                 .teamName("Los Angeles")
