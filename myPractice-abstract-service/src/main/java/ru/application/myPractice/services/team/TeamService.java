@@ -10,4 +10,6 @@ public interface TeamService {
 
     List<TeamDto> findAll();
 
+    TeamDto findByTeamName(String teamName);
+
 }

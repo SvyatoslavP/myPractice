@@ -28,11 +28,11 @@ public class Team {
     @Column(name = "PERSISTENCE_ID")
     private String persistenceId = UUID.randomUUID().toString();
 
-    @Column(name = "TEAM_NAME", length = 32)
+    @Column(name = "TEAM_NAME", length = 32, unique = true)
     private String teamName;
 
     @ElementCollection(targetClass = Player.class)
-    @CollectionTable(name = "PLAYER")
+    @CollectionTable(name = "PLAYERS")
     @AttributeOverrides({
             @AttributeOverride(name = "name", column = @Column(name = "NAME")),
             @AttributeOverride(name = "surname", column = @Column(name = "SURNAME")),
