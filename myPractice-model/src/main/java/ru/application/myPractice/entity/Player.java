@@ -1,6 +1,7 @@
 package ru.application.myPractice.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,7 @@ import javax.persistence.Embeddable;
 @AllArgsConstructor
 @Data
 @EqualsAndHashCode
+@Builder
 @Embeddable
 public class Player {
 
