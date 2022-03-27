@@ -29,6 +29,7 @@ public class TeamServiceImplementation implements TeamService {
     @Override
     public void save(TeamDto teamDto) {
         Team team = TeamMapper.MAPPER.toTeam(teamDto);
+        //TODO: Приходит ответ с задержкой от БД, нужнок как то решить
         Team alreadyExistingTeam = teamRepository.findByTeamName(team.getTeamName());
         if (Objects.isNull(alreadyExistingTeam)) {
             teamRepository.save(team);

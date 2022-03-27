@@ -16,6 +16,7 @@
         <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
         <guava.version>31.0.1-jre</guava.version>
         <apache.commons-lang3.version>3.12.0</apache.commons-lang3.version>
+        <log4jdbc.version>1.2</log4jdbc.version>
     </properties>
 
     <modules>
@@ -106,6 +107,16 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>${apache.commons-lang3.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.googlecode.log4jdbc</groupId>
+            <artifactId>log4jdbc</artifactId>
+            <version>${log4jdbc.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.integralblue</groupId>
+            <artifactId>log4jdbc-spring-boot-starter</artifactId>
+            <version>1.0.2</version>
         </dependency>
     </dependencies>
 
