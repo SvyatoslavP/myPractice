@@ -1,8 +1,13 @@
 package ru.application.myPractice.services.team;
 
-import ru.application.myPractice.entity.Team;
+import ru.application.myPractice.dto.TeamDto;
+
+import java.util.List;
 
 public interface TeamService {
 
-    void save(Team team);
+    void save(TeamDto team);
+
+    List<TeamDto> findAll();
+
 }

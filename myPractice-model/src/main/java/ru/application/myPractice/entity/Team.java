@@ -2,6 +2,7 @@ package ru.application.myPractice.entity;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.OrderBy;
 
 import javax.persistence.AttributeOverride;
@@ -19,6 +20,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "TEAMS")
 @Data
+@EqualsAndHashCode
 public class Team {
 
     @Builder.Default
@@ -29,7 +31,7 @@ public class Team {
     @Column(name = "TEAM_NAME", length = 32)
     private String teamName;
 
-    @ElementCollection
+    @ElementCollection(targetClass = Player.class)
     @CollectionTable(name = "PLAYER")
     @AttributeOverrides({
             @AttributeOverride(name = "name", column = @Column(name = "NAME")),
