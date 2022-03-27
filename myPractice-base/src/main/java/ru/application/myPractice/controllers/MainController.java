@@ -54,6 +54,11 @@ public class MainController {
             set.forEach(System.out::println);
         }
 
+        TeamDto teamHello = teamService.findByTeamName("Hello");
+
+        Set<PlayerDto> set = teamHello.getPlayerSet();
+        System.out.println("--------------");
+        set.forEach(System.out::println);
         return "home";
     }
 
