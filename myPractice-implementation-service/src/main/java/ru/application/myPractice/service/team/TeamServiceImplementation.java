@@ -1,7 +1,7 @@
 package ru.application.myPractice.service.team;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.application.myPractice.dto.TeamDto;
@@ -17,14 +17,10 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 @Transactional
+@AllArgsConstructor
 public class TeamServiceImplementation implements TeamService {
 
     private final TeamRepository teamRepository;
-
-    @Autowired
-    public TeamServiceImplementation(TeamRepository teamRepository) {
-        this.teamRepository = teamRepository;
-    }
 
     @Override
     public void save(TeamDto teamDto) {
