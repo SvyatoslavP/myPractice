@@ -2,8 +2,9 @@ package ru.application.myPractice.controllers;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
 import ru.application.myPractice.dto.PlayerDto;
 import ru.application.myPractice.dto.TeamDto;
 import ru.application.myPractice.services.team.TeamService;
@@ -13,7 +14,8 @@ import java.util.List;
 import java.util.Set;
 
 @Slf4j
-@RestController
+@Controller
+@RequestMapping("/my-practice")
 public class MainController {
 
     private final TeamService teamService;
@@ -25,6 +27,7 @@ public class MainController {
 
     @GetMapping("/home")
     public String homePage() {
+
         //TODO выпилить строку test
         String test = "1234567890";
         log.info("GET /home from REST {} {}", test, test);
@@ -60,11 +63,5 @@ public class MainController {
         System.out.println("--------------");
         set.forEach(System.out::println);
         return "home";
-    }
-
-    @GetMapping("/index")
-    public String pageForAuthenticatedUsers() {
-        log.info("GET /index from REST");
-        return "index";
     }
 }

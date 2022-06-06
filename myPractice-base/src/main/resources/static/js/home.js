@@ -1,0 +1,10 @@
+/**
+ *
+ */
+
+$(document).ready(function () {
+
+    $('.showEditModalBtn').on('click', function () {
+        console.log(this.value);
+    });
+});
