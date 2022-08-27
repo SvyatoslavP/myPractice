@@ -1,28 +1,36 @@
 package ru.application.myPractice.entity;
 
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.persistence.Embeddable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Objects;
+import java.util.UUID;
 
-@Data
-@Embeddable
+/**
+ * Участник
+ */
+@Entity
+@Table(name = "player")
+@Getter
+@Setter
 public class Player {
 
-    protected String name;
-    protected String surname;
-    protected int age;
-
-    @org.hibernate.annotations.Parent
-    protected Team team;
+    @Builder.Default
+    @Id
+    @Column(name = "persistence_id")
+    private String persistenceId = UUID.randomUUID().toString();
+    @Column(name = "player_name")
+    private String playerName;
 
     @SuppressWarnings("unused")
     @Builder
-    public Player(String name, String surname, int age) {
-        this.name = name;
-        this.surname = surname;
-        this.age = age;
+    public Player(String playerName) {
+        this.playerName = playerName;
     }
 
     public Player() {
@@ -33,11 +41,11 @@ public class Player {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Player player = (Player) o;
-        return age == player.age && Objects.equals(name, player.name) && Objects.equals(surname, player.surname);
+        return Objects.equals(playerName, player.playerName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, surname, age);
+        return Objects.hash(playerName);
     }
 }

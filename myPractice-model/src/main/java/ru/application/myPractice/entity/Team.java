@@ -1,53 +1,62 @@
 package ru.application.myPractice.entity;
 
+import com.google.common.collect.Lists;
 import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import org.hibernate.annotations.OrderBy;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
-import javax.persistence.CollectionTable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * Команда
+ */
 @Entity
-@Table(name = "TEAMS")
-@Data
-@EqualsAndHashCode
+@Table(name = "team")
+@Setter
+@Getter
 public class Team {
 
     @Builder.Default
     @Id
-    @Column(name = "PERSISTENCE_ID")
+    @Column(name = "persistence_id")
     private String persistenceId = UUID.randomUUID().toString();
 
-    @Column(name = "TEAM_NAME", length = 32, unique = true)
+    @Column(name = "team_name", length = 32, unique = true)
     private String teamName;
-
-    @ElementCollection(targetClass = Player.class)
-    @CollectionTable(name = "PLAYERS")
-    @AttributeOverrides({
-            @AttributeOverride(name = "name", column = @Column(name = "NAME")),
-            @AttributeOverride(name = "surname", column = @Column(name = "SURNAME")),
-            @AttributeOverride(name = "age", column = @Column(name = "AGE")),
-    })
-    @OrderBy(clause = "surname desc")
-    protected Set<Player> playerSet = new HashSet<>();
+    /**
+     * Список игроков
+     */
+    @OneToMany(targetEntity = Player.class, cascade = CascadeType.ALL)
+    private List<Player> playerList = Lists.newArrayList();
 
     @SuppressWarnings("unused")
     @Builder
-    public Team(String teamName, Set<Player> playerSet) {
+    public Team(String teamName, List<Player> playerList) {
         this.teamName = teamName;
-        this.playerSet = playerSet;
+        this.playerList = playerList;
     }
 
     public Team() {
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Team team = (Team) o;
+        return Objects.equals(teamName, team.teamName) && Objects.equals(playerList, team.playerList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(teamName, playerList);
     }
 }

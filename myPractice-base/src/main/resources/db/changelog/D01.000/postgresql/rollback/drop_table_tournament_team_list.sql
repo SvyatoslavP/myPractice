@@ -1,0 +1,1 @@
+drop table if exists tournament_team_list;

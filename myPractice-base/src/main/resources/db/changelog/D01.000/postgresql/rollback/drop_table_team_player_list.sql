@@ -1,0 +1,1 @@
+drop table if exists team_player_list;

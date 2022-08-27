@@ -34,21 +34,21 @@ public class Objects {
     }
 
     @SuppressWarnings("unused")
-    public static boolean isNullOrEmpty(Collection collection) {
+    public static boolean isNullOrEmpty(Collection<?> collection) {
         return isNull(collection) || collection.isEmpty();
     }
 
     @SuppressWarnings("unused")
-    public static boolean isNotNullNorEmpty(Collection collection) {
+    public static boolean isNotNullNorEmpty(Collection<?> collection) {
         return !isNullOrEmpty(collection);
     }
 
-    public static boolean isNullOrEmpty(Map collection) {
+    public static boolean isNullOrEmpty(Map<?, ?> collection) {
         return isNull(collection) || collection.isEmpty();
     }
 
     @SuppressWarnings("unused")
-    public static boolean isNotNullNorEmpty(Map collection) {
+    public static boolean isNotNullNorEmpty(Map<?, ?> collection) {
         return !isNullOrEmpty(collection);
     }
 

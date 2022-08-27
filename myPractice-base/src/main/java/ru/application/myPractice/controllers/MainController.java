@@ -1,5 +1,6 @@
 package ru.application.myPractice.controllers;
 
+import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,9 +10,7 @@ import ru.application.myPractice.dto.PlayerDto;
 import ru.application.myPractice.dto.TeamDto;
 import ru.application.myPractice.services.team.TeamService;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Slf4j
 @Controller
@@ -32,36 +31,31 @@ public class MainController {
         String test = "1234567890";
         log.info("GET /home from REST {} {}", test, test);
 
-        Set<PlayerDto> players = new HashSet<>(List.of(
+        List<PlayerDto> players = Lists.newArrayList(
                 PlayerDto.builder()
-                        .age(18)
-                        .name("Petya")
-                        .surname("Petrov")
+                        .playerName("Petya")
                         .build(),
                 PlayerDto.builder()
-                        .age(22)
-                        .name("Ivan")
-                        .surname("Ivanov")
-                        .build()
-        ));
+                        .playerName("Ivan")
+                        .build());
 
         TeamDto hello = TeamDto.builder()
-                .teamName("Hello")
-                .playerSet(players)
+                .teamName("Sparta")
+                .playerList(players)
                 .build();
         teamService.save(hello);
 
         List<TeamDto> all = teamService.findAll();
         for (TeamDto teamDto : all) {
-            Set<PlayerDto> set = teamDto.getPlayerSet();
-            set.forEach(System.out::println);
+            List<PlayerDto> playerList = teamDto.getPlayerList();
+            playerList.forEach(System.out::println);
         }
 
-        TeamDto teamHello = teamService.findByTeamName("Hello");
+        TeamDto teamHello = teamService.findByTeamName("Sparta");
 
-        Set<PlayerDto> set = teamHello.getPlayerSet();
+        List<PlayerDto> list = teamHello.getPlayerList();
         System.out.println("--------------");
-        set.forEach(System.out::println);
+        list.forEach(System.out::println);
         return "home";
     }
 }
