@@ -9,9 +9,9 @@ import ru.application.myPractice.entity.Team;
 import ru.application.myPractice.mapper.TeamMapper;
 import ru.application.myPractice.repository.TeamRepository;
 import ru.application.myPractice.services.team.TeamService;
-import ru.application.myPractice.util.Objects;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -26,9 +26,11 @@ public class TeamServiceImplementation implements TeamService {
     public void save(TeamDto teamDto) {
         Team team = TeamMapper.MAPPER.toTeam(teamDto);
         //TODO: Приходит ответ с задержкой от БД, нужнок как то решить
-        Team alreadyExistingTeam = teamRepository.findByTeamName(team.getTeamName());
-        if (Objects.isNull(alreadyExistingTeam)) {
+        Team byTeamName = teamRepository.findByTeamName(team.getTeamName());
+        if (Objects.isNull(byTeamName)) {
             teamRepository.save(team);
+        } else {
+            //такая команда уже существует
         }
     }
 
